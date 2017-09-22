@@ -18,26 +18,46 @@ class ViewController: UIViewController
         
         let image = UIImage(named: "timg.jpeg")
         
+        // gear the image to meet the request of the MobileNet
         let width : CGFloat = 224.0
         let height : CGFloat = 224.0
-        
         UIGraphicsBeginImageContext(CGSize(width: width, height: height))
         image?.draw(in:CGRect(x: 0, y: 0, width: width, height: height))
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
+        let input = pixelBufferFromImage(image: newImage!)!
         
+        // get the timestamp before the net runs
+        let startTimeStamp = NSDate()
+        print("MobileNet Starts Running @ \(startTimeStamp)")
+        
+        // MobileNet runs here
         if #available(iOS 11.0, *)
         {
-            let resnet50 = Resnet50()
-        
-            guard let output = try? resnet50.prediction(image: pixelBufferFromImage(image: newImage!)!)
-                else
+            let mobileNet = MobileNet()
+            
+            for _ in 0 ..< 100
+            {
+                guard
+                    let _ = try? mobileNet.prediction(image: input)
+                    else
                 {
                     fatalError("Unexpected Error.")
                 }
-            print(output.classLabel)
-            print(output.classLabelProbs)
+                
+                //print("Prediction: " + output.classLabel)
+                //print(output.classLabel)
+                //print(output.classLabelProbs)
+            }
         }
+        
+        // get the timestamp after the net runs
+        let endTimeStamp = NSDate()
+        print("MobileNet Ends Running @ \(endTimeStamp)")
+        print("MobileNet Runs for 1000 times, costing ")
+        print("\(endTimeStamp.timeIntervalSince(startTimeStamp as Date)) s")
+        print("Averange Time cost is ")
+        print("\(endTimeStamp.timeIntervalSince(startTimeStamp as Date)) ms / per pic")
     }
     
     func pixelBufferFromImage(image: UIImage) -> CVPixelBuffer?
@@ -45,7 +65,10 @@ class ViewController: UIViewController
         let attrs = [kCVPixelBufferCGImageCompatibilityKey: kCFBooleanTrue, kCVPixelBufferCGBitmapContextCompatibilityKey: kCFBooleanTrue] as CFDictionary
         var pixelBuffer : CVPixelBuffer?
         let status = CVPixelBufferCreate(kCFAllocatorDefault, Int(image.size.width), Int(image.size.height), kCVPixelFormatType_32ARGB, attrs, &pixelBuffer)
-        guard (status == kCVReturnSuccess) else
+        
+        guard
+            (status == kCVReturnSuccess)
+        else
         {
             return nil
         }
@@ -54,7 +77,14 @@ class ViewController: UIViewController
         let pixelData = CVPixelBufferGetBaseAddress(pixelBuffer!)
         
         let rgbColorSpace = CGColorSpaceCreateDeviceRGB()
-        let context = CGContext(data: pixelData, width: Int(image.size.width), height: Int(image.size.height), bitsPerComponent: 8, bytesPerRow: CVPixelBufferGetBytesPerRow(pixelBuffer!), space: rgbColorSpace, bitmapInfo: CGImageAlphaInfo.noneSkipFirst.rawValue)
+        
+        let context = CGContext(data: pixelData,
+                                width: Int(image.size.width),
+                                height: Int(image.size.height),
+                                bitsPerComponent: 8,
+                                bytesPerRow: CVPixelBufferGetBytesPerRow(pixelBuffer!),
+                                space: rgbColorSpace,
+                                bitmapInfo: CGImageAlphaInfo.noneSkipFirst.rawValue)
         
         context?.translateBy(x: 0, y: image.size.height)
         context?.scaleBy(x: 1.0, y: -1.0)

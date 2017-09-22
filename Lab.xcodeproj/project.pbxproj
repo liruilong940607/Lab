@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ED357D0E1F75317300149757 /* MobileNet.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = ED357D0D1F75317300149757 /* MobileNet.mlmodel */; };
 		EDA44D081F736F24000745A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA44D071F736F24000745A3 /* AppDelegate.swift */; };
 		EDA44D0A1F736F24000745A3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA44D091F736F24000745A3 /* ViewController.swift */; };
 		EDA44D0D1F736F24000745A3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDA44D0B1F736F24000745A3 /* Main.storyboard */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		ED357D0D1F75317300149757 /* MobileNet.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = MobileNet.mlmodel; path = ../../../Downloads/MobileNet.mlmodel; sourceTree = "<group>"; };
 		EDA44D041F736F24000745A3 /* Lab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lab.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDA44D071F736F24000745A3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EDA44D091F736F24000745A3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 		EDA44D061F736F24000745A3 /* Lab */ = {
 			isa = PBXGroup;
 			children = (
+				ED357D0D1F75317300149757 /* MobileNet.mlmodel */,
 				EDC7184B1F73A2DA0001E047 /* Resnet50.mlmodel */,
 				EDA44D071F736F24000745A3 /* AppDelegate.swift */,
 				EDA44D091F736F24000745A3 /* ViewController.swift */,
@@ -151,6 +154,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED357D0E1F75317300149757 /* MobileNet.mlmodel in Sources */,
 				EDA44D0A1F736F24000745A3 /* ViewController.swift in Sources */,
 				EDC7184C1F73A2DA0001E047 /* Resnet50.mlmodel in Sources */,
 				EDA44D081F736F24000745A3 /* AppDelegate.swift in Sources */,
