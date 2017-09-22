@@ -1,8 +1,10 @@
 # HumanSeg IOS APP
 
-Demo project applying the coreML code ResNet50 on developer.apple.com
-- Input: a picture stored in the project named time.jpeg
-- Output: Line 1 classification, Other lines are the dictionary of all categories and confidence
+Demo project applying the coreML code MobileNet on developer.apple.com
+Aim to calculate the efficiency of this net
+
+- Input: 1000 pictures size 224*224
+- Output: Total time Cost and averange time cost per pic
 
 ALL OUTPUTS ARE IN THE CONSOLE OF XCODE. Only blank page implemented in the app
 

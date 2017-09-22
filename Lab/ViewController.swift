@@ -36,7 +36,7 @@ class ViewController: UIViewController
         {
             let mobileNet = MobileNet()
             
-            for _ in 0 ..< 100
+            for _ in 0 ..< 1000
             {
                 guard
                     let _ = try? mobileNet.prediction(image: input)
@@ -57,7 +57,7 @@ class ViewController: UIViewController
         print("MobileNet Runs for 1000 times, costing ")
         print("\(endTimeStamp.timeIntervalSince(startTimeStamp as Date)) s")
         print("Averange Time cost is ")
-        print("\(endTimeStamp.timeIntervalSince(startTimeStamp as Date)) ms / per pic")
+        print("\(endTimeStamp.timeIntervalSince(startTimeStamp as Date) * 1) ms / per pic")
     }
     
     func pixelBufferFromImage(image: UIImage) -> CVPixelBuffer?
