@@ -7,18 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		ED357D0E1F75317300149757 /* MobileNet.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = ED357D0D1F75317300149757 /* MobileNet.mlmodel */; };
+		ED3E78CA1F75FE5A002AA457 /* MobileNet.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = ED3E78C91F75FE5A002AA457 /* MobileNet.mlmodel */; };
 		EDA44D081F736F24000745A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA44D071F736F24000745A3 /* AppDelegate.swift */; };
 		EDA44D0A1F736F24000745A3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA44D091F736F24000745A3 /* ViewController.swift */; };
 		EDA44D0D1F736F24000745A3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDA44D0B1F736F24000745A3 /* Main.storyboard */; };
 		EDA44D0F1F736F24000745A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDA44D0E1F736F24000745A3 /* Assets.xcassets */; };
 		EDA44D121F736F24000745A3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDA44D101F736F24000745A3 /* LaunchScreen.storyboard */; };
 		EDC718491F73A2B60001E047 /* CoreML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDC718481F73A2B60001E047 /* CoreML.framework */; };
-		EDC7184C1F73A2DA0001E047 /* Resnet50.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = EDC7184B1F73A2DA0001E047 /* Resnet50.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		ED357D0D1F75317300149757 /* MobileNet.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = MobileNet.mlmodel; path = ../../../Downloads/MobileNet.mlmodel; sourceTree = "<group>"; };
+		ED3E78C91F75FE5A002AA457 /* MobileNet.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MobileNet.mlmodel; sourceTree = "<group>"; };
 		EDA44D041F736F24000745A3 /* Lab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lab.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDA44D071F736F24000745A3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EDA44D091F736F24000745A3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -27,7 +26,6 @@
 		EDA44D111F736F24000745A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EDA44D131F736F24000745A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EDC718481F73A2B60001E047 /* CoreML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreML.framework; path = System/Library/Frameworks/CoreML.framework; sourceTree = SDKROOT; };
-		EDC7184B1F73A2DA0001E047 /* Resnet50.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Resnet50.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,8 +60,7 @@
 		EDA44D061F736F24000745A3 /* Lab */ = {
 			isa = PBXGroup;
 			children = (
-				ED357D0D1F75317300149757 /* MobileNet.mlmodel */,
-				EDC7184B1F73A2DA0001E047 /* Resnet50.mlmodel */,
+				ED3E78C91F75FE5A002AA457 /* MobileNet.mlmodel */,
 				EDA44D071F736F24000745A3 /* AppDelegate.swift */,
 				EDA44D091F736F24000745A3 /* ViewController.swift */,
 				EDA44D0B1F736F24000745A3 /* Main.storyboard */,
@@ -154,10 +151,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED357D0E1F75317300149757 /* MobileNet.mlmodel in Sources */,
 				EDA44D0A1F736F24000745A3 /* ViewController.swift in Sources */,
-				EDC7184C1F73A2DA0001E047 /* Resnet50.mlmodel in Sources */,
 				EDA44D081F736F24000745A3 /* AppDelegate.swift in Sources */,
+				ED3E78CA1F75FE5A002AA457 /* MobileNet.mlmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

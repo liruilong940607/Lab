@@ -19,8 +19,8 @@ class ViewController: UIViewController
         let image = UIImage(named: "timg.jpeg")
         
         // gear the image to meet the request of the MobileNet
-        let width : CGFloat = 224.0
-        let height : CGFloat = 224.0
+        let width : CGFloat = 112.0
+        let height : CGFloat = 112.0
         UIGraphicsBeginImageContext(CGSize(width: width, height: height))
         image?.draw(in:CGRect(x: 0, y: 0, width: width, height: height))
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
@@ -39,8 +39,8 @@ class ViewController: UIViewController
             for _ in 0 ..< 1000
             {
                 guard
-                    let _ = try? mobileNet.prediction(image: input)
-                    else
+                    let _ = try? mobileNet.prediction(data: input)
+                else
                 {
                     fatalError("Unexpected Error.")
                 }
