@@ -7,7 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		ED3E78CA1F75FE5A002AA457 /* MobileNet.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = ED3E78C91F75FE5A002AA457 /* MobileNet.mlmodel */; };
+		ED4289D41F793D630032DAA9 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4289AD1F793D620032DAA9 /* Array.swift */; };
+		ED4289D51F793D630032DAA9 /* CVPixelBuffer+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4289AE1F793D620032DAA9 /* CVPixelBuffer+Helpers.swift */; };
+		ED4289D61F793D630032DAA9 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4289AF1F793D620032DAA9 /* Math.swift */; };
+		ED4289D71F793D630032DAA9 /* MLMultiArray+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4289B01F793D620032DAA9 /* MLMultiArray+Image.swift */; };
+		ED4289D81F793D630032DAA9 /* MultiArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4289B11F793D620032DAA9 /* MultiArray.swift */; };
+		ED4289D91F793D630032DAA9 /* NonMaxSuppression.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4289B21F793D620032DAA9 /* NonMaxSuppression.swift */; };
+		ED4289DA1F793D630032DAA9 /* Predictions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4289B31F793D620032DAA9 /* Predictions.swift */; };
+		ED4289DB1F793D630032DAA9 /* UIImage+CVPixelBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4289B41F793D620032DAA9 /* UIImage+CVPixelBuffer.swift */; };
 		EDA44D081F736F24000745A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA44D071F736F24000745A3 /* AppDelegate.swift */; };
 		EDA44D0A1F736F24000745A3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA44D091F736F24000745A3 /* ViewController.swift */; };
 		EDA44D0D1F736F24000745A3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDA44D0B1F736F24000745A3 /* Main.storyboard */; };
@@ -17,7 +24,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		ED3E78C91F75FE5A002AA457 /* MobileNet.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MobileNet.mlmodel; sourceTree = "<group>"; };
+		ED4289AD1F793D620032DAA9 /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
+		ED4289AE1F793D620032DAA9 /* CVPixelBuffer+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CVPixelBuffer+Helpers.swift"; sourceTree = "<group>"; };
+		ED4289AF1F793D620032DAA9 /* Math.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
+		ED4289B01F793D620032DAA9 /* MLMultiArray+Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MLMultiArray+Image.swift"; sourceTree = "<group>"; };
+		ED4289B11F793D620032DAA9 /* MultiArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiArray.swift; sourceTree = "<group>"; };
+		ED4289B21F793D620032DAA9 /* NonMaxSuppression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NonMaxSuppression.swift; sourceTree = "<group>"; };
+		ED4289B31F793D620032DAA9 /* Predictions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Predictions.swift; sourceTree = "<group>"; };
+		ED4289B41F793D620032DAA9 /* UIImage+CVPixelBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+CVPixelBuffer.swift"; sourceTree = "<group>"; };
 		EDA44D041F736F24000745A3 /* Lab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lab.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDA44D071F736F24000745A3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EDA44D091F736F24000745A3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -40,9 +54,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		ED4289AC1F793D620032DAA9 /* CoreMLHelpers */ = {
+			isa = PBXGroup;
+			children = (
+				ED4289AD1F793D620032DAA9 /* Array.swift */,
+				ED4289AE1F793D620032DAA9 /* CVPixelBuffer+Helpers.swift */,
+				ED4289AF1F793D620032DAA9 /* Math.swift */,
+				ED4289B01F793D620032DAA9 /* MLMultiArray+Image.swift */,
+				ED4289B11F793D620032DAA9 /* MultiArray.swift */,
+				ED4289B21F793D620032DAA9 /* NonMaxSuppression.swift */,
+				ED4289B31F793D620032DAA9 /* Predictions.swift */,
+				ED4289B41F793D620032DAA9 /* UIImage+CVPixelBuffer.swift */,
+			);
+			name = CoreMLHelpers;
+			path = "../../Downloads/CoreMLHelpers-master/CoreMLHelpers";
+			sourceTree = "<group>";
+		};
 		EDA44CFB1F736F24000745A3 = {
 			isa = PBXGroup;
 			children = (
+				ED4289AC1F793D620032DAA9 /* CoreMLHelpers */,
 				EDA44D061F736F24000745A3 /* Lab */,
 				EDA44D051F736F24000745A3 /* Products */,
 				EDC718471F73A2B60001E047 /* Frameworks */,
@@ -60,7 +91,6 @@
 		EDA44D061F736F24000745A3 /* Lab */ = {
 			isa = PBXGroup;
 			children = (
-				ED3E78C91F75FE5A002AA457 /* MobileNet.mlmodel */,
 				EDA44D071F736F24000745A3 /* AppDelegate.swift */,
 				EDA44D091F736F24000745A3 /* ViewController.swift */,
 				EDA44D0B1F736F24000745A3 /* Main.storyboard */,
@@ -151,9 +181,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED4289DA1F793D630032DAA9 /* Predictions.swift in Sources */,
 				EDA44D0A1F736F24000745A3 /* ViewController.swift in Sources */,
+				ED4289D51F793D630032DAA9 /* CVPixelBuffer+Helpers.swift in Sources */,
+				ED4289D41F793D630032DAA9 /* Array.swift in Sources */,
+				ED4289DB1F793D630032DAA9 /* UIImage+CVPixelBuffer.swift in Sources */,
+				ED4289D71F793D630032DAA9 /* MLMultiArray+Image.swift in Sources */,
 				EDA44D081F736F24000745A3 /* AppDelegate.swift in Sources */,
-				ED3E78CA1F75FE5A002AA457 /* MobileNet.mlmodel in Sources */,
+				ED4289D81F793D630032DAA9 /* MultiArray.swift in Sources */,
+				ED4289D91F793D630032DAA9 /* NonMaxSuppression.swift in Sources */,
+				ED4289D61F793D630032DAA9 /* Math.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

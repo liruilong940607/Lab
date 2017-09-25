@@ -1,12 +1,19 @@
 # HumanSeg IOS APP
 
-Demo project applying the coreML code MobileNet in the lab, aim to calculate the efficiency of this net
+Demo project applying the coreML code MobileNet in the lab.
 
-- Input: 1000 pictures size 112*112
-- Output: Total time Cost and averange time cost per pic
-- Efficiency: 24ms per image, CPU occupation rate: 130%
+## Things Done
+- Calculate the efficiency of this net
+- Make a demo to make this net run correctly and give proper predicition
 
-ALL OUTPUTS ARE IN THE CONSOLE OF XCODE. Only blank page implemented in the app at present
+## TODO
+- Recover the original size of the prediction picture
+- Do proper padding for the input picture with less time complexity
+- Read pictutures from the memory of the iphone rather than the project lib
+
+## Input and Output
+- Input: A picture size 112*112
+- Output: The prediction humanseg picture (gray)
 
 ## Dependence
 Xcode Version 9.0(9A235)
