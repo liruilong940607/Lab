@@ -21,6 +21,7 @@
 		EDA44D0F1F736F24000745A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDA44D0E1F736F24000745A3 /* Assets.xcassets */; };
 		EDA44D121F736F24000745A3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDA44D101F736F24000745A3 /* LaunchScreen.storyboard */; };
 		EDC718491F73A2B60001E047 /* CoreML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDC718481F73A2B60001E047 /* CoreML.framework */; };
+		EDE60F011F7A874300878CA1 /* MobileNet.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = EDE60F001F7A874300878CA1 /* MobileNet.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		EDA44D111F736F24000745A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EDA44D131F736F24000745A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EDC718481F73A2B60001E047 /* CoreML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreML.framework; path = System/Library/Frameworks/CoreML.framework; sourceTree = SDKROOT; };
+		EDE60F001F7A874300878CA1 /* MobileNet.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MobileNet.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 		EDA44D061F736F24000745A3 /* Lab */ = {
 			isa = PBXGroup;
 			children = (
+				EDE60F001F7A874300878CA1 /* MobileNet.mlmodel */,
 				EDA44D071F736F24000745A3 /* AppDelegate.swift */,
 				EDA44D091F736F24000745A3 /* ViewController.swift */,
 				EDA44D0B1F736F24000745A3 /* Main.storyboard */,
@@ -189,6 +192,7 @@
 				ED4289D71F793D630032DAA9 /* MLMultiArray+Image.swift in Sources */,
 				EDA44D081F736F24000745A3 /* AppDelegate.swift in Sources */,
 				ED4289D81F793D630032DAA9 /* MultiArray.swift in Sources */,
+				EDE60F011F7A874300878CA1 /* MobileNet.mlmodel in Sources */,
 				ED4289D91F793D630032DAA9 /* NonMaxSuppression.swift in Sources */,
 				ED4289D61F793D630032DAA9 /* Math.swift in Sources */,
 			);
