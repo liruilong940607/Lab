@@ -25,6 +25,17 @@ class ViewController: UIViewController
         // INIT : a black imahe used to do the padding
         let pad : UIImage = MultiArray<Double>(shape : [3, height_Int, width_Int]).image(offset: 0, scale: 1)!
         
+        // INIT : a pixelBuffer to store the resized & padded image
+        var pixelBuffer: CVPixelBuffer?
+        let attrs = [kCVPixelBufferCGImageCompatibilityKey: kCFBooleanTrue,
+                     kCVPixelBufferCGBitmapContextCompatibilityKey: kCFBooleanTrue]
+        CVPixelBufferCreate(kCFAllocatorDefault,
+                            width_Int,
+                            height_Int,
+                            kCVPixelFormatType_32ARGB,
+                            attrs as CFDictionary,
+                            &pixelBuffer)
+        
         // INIT : CoreML Net init
         let mobileNet = MobileNet()
         
@@ -43,26 +54,30 @@ class ViewController: UIViewController
         // show image after proprocess
         
         // PREPROCESS VER 2
-        // deal
-        let input = dealRawImage(image: image!, dstshape: [height_Int, width_Int], pad: pad)
+        dealRawImage(image: image!, dstshape: [height_Int, width_Int], pad: pad, pixelBuffer: pixelBuffer)
         
-        // net time
-        let nst : NSDate = NSDate()
+        let penis = UIImage(pixelBuffer: pixelBuffer!)
+        let uv1 = UIView(frame: CGRect(x: 50, y: 50, width: width_Int, height: height_Int))
+        let color1 = UIColor(patternImage: penis!)
+        uv1.backgroundColor = color1
+        self.view.addSubview(uv1)
         
         // MobileNet runs here
         // Net RUNS in prediction() and return the answer to output
-        //for _ in 0 ..< 1000{
-        let output = try? mobileNet.prediction(data: input!)
+        let output = try? mobileNet.prediction(data: pixelBuffer!)
+        
+        // net output generation timestamp
+        let nst : NSDate = NSDate()
         
         // turn the output MLMultiArray into a gray image
         let ma = MultiArray<Double>((output?.prob)!, true)
-        let outputImage : UIImage = ma.image(offset: 0, scale: 225)!
         
         // show the gray image on the screen
-        let uv2 = UIView(frame: CGRect(x: 50, y: 300, width: width_Int, height: height_Int))
+        let outputImage : UIImage = ma.image(offset: 0, scale: 225)!
+        /*let uv2 = UIView(frame: CGRect(x: 50, y: 300, width: width_Int, height: height_Int))
         let color2 = UIColor(patternImage: outputImage)
         uv2.backgroundColor = color2
-        self.view.addSubview(uv2)/**/
+        self.view.addSubview(uv2)*/
         
         // time
         let et : NSDate = NSDate()
@@ -90,7 +105,7 @@ class ViewController: UIViewController
         return newImage!
     }
     
-    func dealRawImage(image : UIImage, dstshape : [Int], pad : UIImage) -> CVPixelBuffer?
+    func dealRawImage(image : UIImage, dstshape : [Int], pad : UIImage, pixelBuffer : CVPixelBuffer?)
     {
         // time
         let st = NSDate()
@@ -102,17 +117,6 @@ class ViewController: UIViewController
         let dst_width = Int(min(CGFloat(dstshape[1]) * ratio, CGFloat(dstshape[0])))
         let dst_height = Int(min(CGFloat(dstshape[0]) / ratio, CGFloat(dstshape[1])))
         let origin = [Int((dstshape[0] - dst_height) / 2), Int((dstshape[1] - dst_width) / 2)]
-        
-        // init a pixelBuffer to store the resized & padded image
-        var pixelBuffer: CVPixelBuffer?
-        let attrs = [kCVPixelBufferCGImageCompatibilityKey: kCFBooleanTrue,
-                     kCVPixelBufferCGBitmapContextCompatibilityKey: kCFBooleanTrue]
-        CVPixelBufferCreate(kCFAllocatorDefault,
-                            dstshape[1],
-                            dstshape[0],
-                            kCVPixelFormatType_32ARGB,
-                            attrs as CFDictionary,
-                            &pixelBuffer)
         
         // get the pointer of this pixelBuffer
         CVPixelBufferLockBaseAddress(pixelBuffer!, CVPixelBufferLockFlags(rawValue: 0))
@@ -131,19 +135,23 @@ class ViewController: UIViewController
         UIGraphicsPushContext(context)
         context.translateBy(x: 0, y: CGFloat(dstshape[0]))
         context.scaleBy(x: 1, y: -1)
-        //self.draw(in: CGRect(x: 0, y: 0, width: width, height: height))
+        
+        //print("context creation finish time : \(NSDate().timeIntervalSince(st as Date) * 1000) ms")
+        
+        //print("padding draw start time : \(NSDate().timeIntervalSince(st as Date) * 1000) ms")
         pad.draw(in:CGRect(x: 0, y: 0, width: dstshape[1], height: dstshape[0]))
+        //print("padding draw finish time : \(NSDate().timeIntervalSince(st as Date) * 1000) ms")
+        
+        //print("image draw start time : \(NSDate().timeIntervalSince(st as Date) * 1000) ms")
         image.draw(in: CGRect(x: origin[1], y: origin[0], width: dst_width, height: dst_height))
+        //print("image draw finish time : \(NSDate().timeIntervalSince(st as Date) * 1000) ms")
+        
         UIGraphicsPopContext()
         
         // unlock
         CVPixelBufferUnlockBaseAddress(pixelBuffer!, CVPixelBufferLockFlags(rawValue: 0))
         
-        // time out
-        let et = NSDate()
-        print("preprocess time : \(et.timeIntervalSince(st as! Date) * 1000) ms")
-        
-        return pixelBuffer
+        print("raw image deal takes : \(NSDate().timeIntervalSince(st as Date) * 1000) ms")
     }
 
     override func didReceiveMemoryWarning()
