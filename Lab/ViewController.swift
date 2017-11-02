@@ -14,13 +14,8 @@ import AssetsLibrary
 import MobileCoreServices
 
 
-class ViewController: UIViewController, AVCaptureFileOutputRecordingDelegate
+class ViewController: UIViewController
 {
-    func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
-        <#code#>
-    }
-    
-    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -29,12 +24,7 @@ class ViewController: UIViewController, AVCaptureFileOutputRecordingDelegate
         let session = AVCaptureSession()
         session.sessionPreset = AVCaptureSession.Preset.low
         
-        // from here we get frames of the video
-        let frontCameraOutput = AVCaptureVideoDataOutput()
-        frontCameraOutput.videoSettings = [ kCVPixelBufferPixelFormatTypeKey as String : kCVPixelFormatType_32BGRA ]
-        frontCameraOutput.alwaysDiscardsLateVideoFrames = true;
-        
-        // get front camera input / output objects and add them to the capture session
+        // add input to session
         let devices = AVCaptureDevice.devices()
         
         for device in devices
@@ -49,25 +39,25 @@ class ViewController: UIViewController, AVCaptureFileOutputRecordingDelegate
                 }
                 catch
                 {
-                    
+                    print("front camera not found")
                 }
                 
                 break
             }
         }
         
-        // create a serial dispatch queue used for the sample buffer delegate
-        // as well as when a still image is captured
-        // a serial dispatch queue must be used to guarantee that video frames will be delivered in order
-        
+        // add output to session
+        let frontCameraOutput = AVCaptureVideoDataOutput()
+        frontCameraOutput.videoSettings = [ kCVPixelBufferPixelFormatTypeKey as String : kCVPixelFormatType_32BGRA ]
+        frontCameraOutput.alwaysDiscardsLateVideoFrames = true;
         var frontCameraOutputQueue = DispatchQueue(label: "VideoDataOutputQueue")
         frontCameraOutput.setSampleBufferDelegate(self as? AVCaptureVideoDataOutputSampleBufferDelegate, queue: frontCameraOutputQueue)
         session.addOutput(frontCameraOutput)
         
+        // start capture
+        session.startRunning()
         
         print("666")
-        
-        session.startRunning();
         
         /*// INIT : supposed height ang width of the input image of the MobileNet
         let width : CGFloat = 224.0
