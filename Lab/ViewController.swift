@@ -14,8 +14,12 @@ import AssetsLibrary
 import MobileCoreServices
 
 
-class ViewController: UIViewController
+class ViewController: UIViewController, AVCaptureFileOutputRecordingDelegate
 {
+    func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
+        <#code#>
+    }
+    
     
     override func viewDidLoad()
     {
@@ -60,11 +64,6 @@ class ViewController: UIViewController
         frontCameraOutput.setSampleBufferDelegate(self as? AVCaptureVideoDataOutputSampleBufferDelegate, queue: frontCameraOutputQueue)
         session.addOutput(frontCameraOutput)
         
-        
-        
-        //let frontCameraOutputDelegate = frontCameraOutput as? AVCaptureVideoDataOutputSampleBufferDelegate
-        
-        //frontCameraOutputDelegate?.captureOutput(frontCameraOutput, didDrop: <#T##CMSampleBuffer#>, from: session)
         
         print("666")
         
