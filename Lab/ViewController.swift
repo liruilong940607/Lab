@@ -18,119 +18,69 @@ class ViewController: UIViewController
 {
     override func viewDidLoad()
     {
-        super.viewDidLoad()
+         super.viewDidLoad()
         
-        // init session
-        let session = AVCaptureSession()
-        session.sessionPreset = AVCaptureSession.Preset.low
-        
-        // add input to session
-        let devices = AVCaptureDevice.devices()
-        
-        for device in devices
-        {
-            if device.hasMediaType(AVMediaType.video) && device.position == AVCaptureDevice.Position.front
-            {
-                do
-                {
-                    let frontCameraInput = try AVCaptureDeviceInput(device: device)
-                    session.addInput(frontCameraInput)
-                    print("\(device.localizedName)")
-                }
-                catch
-                {
-                    print("front camera not found")
-                }
-                
-                break
-            }
-        }
-        
-        // add output to session
-        let frontCameraOutput = AVCaptureVideoDataOutput()
-        frontCameraOutput.videoSettings = [ kCVPixelBufferPixelFormatTypeKey as String : kCVPixelFormatType_32BGRA ]
-        frontCameraOutput.alwaysDiscardsLateVideoFrames = true;
-        var frontCameraOutputQueue = DispatchQueue(label: "VideoDataOutputQueue")
-        frontCameraOutput.setSampleBufferDelegate(self as? AVCaptureVideoDataOutputSampleBufferDelegate, queue: frontCameraOutputQueue)
-        session.addOutput(frontCameraOutput)
-        
-        // start capture
-        session.startRunning()
-        
-        print("666")
-        
-        /*// INIT : supposed height ang width of the input image of the MobileNet
-        let width : CGFloat = 224.0
-        let height : CGFloat = 224.0
-        let width_Int : Int = Int(width)
-        let height_Int : Int = Int(height)
-        
-        // INIT : a black imahe used to do the padding
-        let pad : UIImage = MultiArray<Double>(shape : [3, height_Int, width_Int]).image(offset: 0, scale: 1)!
-        
-        // INIT : a pixelBuffer to store the resized & padded image
-        var pixelBuffer: CVPixelBuffer?
-        let attrs = [kCVPixelBufferCGImageCompatibilityKey: kCFBooleanTrue,
-                     kCVPixelBufferCGBitmapContextCompatibilityKey: kCFBooleanTrue]
-        CVPixelBufferCreate(kCFAllocatorDefault,
-                            width_Int,
-                            height_Int,
-                            kCVPixelFormatType_32ARGB,
-                            attrs as CFDictionary,
-                            &pixelBuffer)
-        
-        // INIT : CoreML Net init
-        let mobileNet = MobileNet()
-        
-        // INIT : the UIView to show the preserved image
-        let uv2 = UIView(frame: CGRect(x: 0, y: 50, width: 360, height: 640))
-        self.view.addSubview(uv2)
-        
-        // 获取本地视频
-        let filePath = Bundle.main.path(forResource: "1", ofType: "mp4")
-        let videoURL = NSURL(fileURLWithPath: filePath!)
-        let avAsset = AVAsset(url: videoURL as URL) // cap = videoCapture()
-        let generator = AVAssetImageGenerator(asset: avAsset)
-        generator.appliesPreferredTrackTransform = true
-        
-        // preprocess time start
-        let st : NSDate = NSDate()
-        
-        var sec = 2.0
-        
-        let time = CMTimeMakeWithSeconds(sec, 600)
-        let imageRef = try! generator.copyCGImage(at: time, actualTime: nil)
-        let image = UIImage(cgImage: imageRef)
-
-            // resize & padding
-            var bounds = dealRawImage(image: image,
-                                      dstshape: [height_Int, width_Int],
-                                      pad: pad,
-                                      pixelBuffer: pixelBuffer)
-        
-        // net preprocess time start
-        let nst : NSDate = NSDate()
-        
-        for _ in 0 ..< 1000
-        {
-        
-            // MobileNet runs here
-            let output = try? mobileNet.prediction(data: pixelBuffer!)
-        }
-            // turn the output MLMultiArray into a gray image
-            //let pi = (OpenCVWrapper.processImage(withOpenCV: image, withPrediction: (output?.prob)!, andBounds: &bounds))!
-            
-            // show the gray image on the screen
-            //let color2 = UIColor(patternImage: pi)
-            //uv2.backgroundColor = color2
-            
-            //sec += 0.01
-        
-        // total time
-        print("total time: \(NSDate().timeIntervalSince(nst as Date)) ms")*/
+         // INIT : supposed height ang width of the input image of the MobileNet
+         let width : CGFloat = 224.0
+         let height : CGFloat = 224.0
+         let width_Int : Int = Int(width)
+         let height_Int : Int = Int(height)
+         
+         // INIT : a black imahe used to do the padding
+         let pad : UIImage = MultiArray<Double>(shape : [3, height_Int, width_Int]).image(offset: 0, scale: 1)!
+         
+         // INIT : a pixelBuffer to store the resized & padded image
+         var pixelBuffer: CVPixelBuffer?
+         let attrs =
+         [
+            kCVPixelBufferCGImageCompatibilityKey: kCFBooleanTrue,
+            kCVPixelBufferCGBitmapContextCompatibilityKey: kCFBooleanTrue
+         ]
+         CVPixelBufferCreate(kCFAllocatorDefault,
+                             width_Int,
+                             height_Int,
+                             kCVPixelFormatType_32ARGB,
+                             attrs as CFDictionary,
+                             &pixelBuffer)
+         
+         // INIT : CoreML Net init
+         let mobileNet = MobileNet()
+         
+         // INIT : the UIView to show the preserved image
+         let uv2 = UIView(frame: CGRect(x: 0, y: 50, width: 360, height: 640))
+         self.view.addSubview(uv2)
+         
+         // preprocess time start
+         let st : NSDate = NSDate()
+         
+         let image = UIImage(named: "720-1280.jpeg")!
+         
+         // resize & padding
+         var bounds = dealRawImage(image: image,
+         dstshape: [height_Int, width_Int],
+         pad: pad,
+         pixelBuffer: pixelBuffer)
+         
+         // MobileNet runs here
+         let output = try? mobileNet.prediction(data: pixelBuffer!)
+         // turn the output MLMultiArray into a gray image
+         let pi = (OpenCVWrapper.processImage(withOpenCV: image, withPrediction: (output?.prob)!, andBounds: &bounds))!
+         
+         // show the gray image on the screen
+         let color2 = UIColor(patternImage: pi)
+         uv2.backgroundColor = color2
+         
+         // total time
+         print("total time: \(NSDate().timeIntervalSince(st as Date) * 1000) ms")
         
     }
-
+    
+    override func didReceiveMemoryWarning()
+    {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
     func dealRawImage(image: UIImage, dstshape: [Int], pad: UIImage, pixelBuffer: CVPixelBuffer?) -> CGRect
     {
         // decide whether to shrink in height or width
@@ -167,12 +117,7 @@ class ViewController: UIViewController
         
         return CGRect(x: origin[1], y: origin[0], width: dst_width, height: dst_height)
     }
-
-    override func didReceiveMemoryWarning()
-    {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
+    
 }
+
 
