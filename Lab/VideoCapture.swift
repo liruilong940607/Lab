@@ -15,7 +15,7 @@ public class VideoCapture: NSObject
     
     public var previewLayer: AVCaptureVideoPreviewLayer?
     public weak var delegate: VideoCaptureDelegate?
-    public var fps = 15
+    public var fps = 10
 
     let captureSession = AVCaptureSession()
     let videoOutput = AVCaptureVideoDataOutput()
@@ -42,19 +42,21 @@ public class VideoCapture: NSObject
         captureSession.beginConfiguration()
         captureSession.sessionPreset = sessionPreset
 
+        // 调用后置摄像头
         /*guard let captureDevice = AVCaptureDevice.default(for: AVMediaType.video) else
         {
             print("Error: no video devices available")
             return false
         }*/
         
+        // 调用前置摄像头
         guard let captureDevice = AVCaptureDevice.default(AVCaptureDevice.DeviceType.builtInWideAngleCamera,
                                                           for: AVMediaType.video, 
                                                           position: AVCaptureDevice.Position.front) else
         {
-            print("Error: no video devices available")
+            print("Error: no front camera available")
             return false
-        }
+        }/**/
 
         guard let videoInput = try? AVCaptureDeviceInput(device: captureDevice) else
         {
@@ -70,6 +72,8 @@ public class VideoCapture: NSObject
         let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         previewLayer.videoGravity = AVLayerVideoGravity.resizeAspect
         previewLayer.connection?.videoOrientation = .portrait
+        //previewLayer.connection?.automaticallyAdjustsVideoMirroring = true
+        //previewLayer.connection?.isVideoMirrored = false
         self.previewLayer = previewLayer
 
         let settings: [String : Any] =

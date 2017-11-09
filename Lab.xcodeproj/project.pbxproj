@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		ED10B80D1FAB335B007CEDDA /* MobileNet.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = ED10B80C1FAB335A007CEDDA /* MobileNet.mlmodel */; };
 		ED69CFD51F7FD3F9005EB009 /* OpenCVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = ED69CFD41F7FD3F9005EB009 /* OpenCVWrapper.mm */; };
 		ED69CFE21F7FE352005EB009 /* UIImage+OpenCV.mm in Sources */ = {isa = PBXBuildFile; fileRef = ED69CFE11F7FE352005EB009 /* UIImage+OpenCV.mm */; };
 		ED7CB5E01FAB19BE00DAB977 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED7CB5DF1FAB19BE00DAB977 /* opencv2.framework */; };
@@ -26,10 +25,10 @@
 		EDA44D0F1F736F24000745A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDA44D0E1F736F24000745A3 /* Assets.xcassets */; };
 		EDA44D121F736F24000745A3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDA44D101F736F24000745A3 /* LaunchScreen.storyboard */; };
 		EDC718491F73A2B60001E047 /* CoreML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDC718481F73A2B60001E047 /* CoreML.framework */; };
+		EDE9056E1FAC8F5900645FBF /* MobileNet.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = EDE9056D1FAC8F5900645FBF /* MobileNet.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		ED10B80C1FAB335A007CEDDA /* MobileNet.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MobileNet.mlmodel; sourceTree = "<group>"; };
 		ED69CFD31F7FD3F9005EB009 /* Lab-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Lab-Bridging-Header.h"; sourceTree = "<group>"; };
 		ED69CFD41F7FD3F9005EB009 /* OpenCVWrapper.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenCVWrapper.mm; sourceTree = "<group>"; };
 		ED69CFD61F7FD441005EB009 /* OpenCVWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenCVWrapper.h; sourceTree = "<group>"; };
@@ -53,6 +52,7 @@
 		EDA44D111F736F24000745A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EDA44D131F736F24000745A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EDC718481F73A2B60001E047 /* CoreML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreML.framework; path = System/Library/Frameworks/CoreML.framework; sourceTree = SDKROOT; };
+		EDE9056D1FAC8F5900645FBF /* MobileNet.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MobileNet.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,7 +104,7 @@
 		EDA44D061F736F24000745A3 /* Lab */ = {
 			isa = PBXGroup;
 			children = (
-				ED10B80C1FAB335A007CEDDA /* MobileNet.mlmodel */,
+				EDE9056D1FAC8F5900645FBF /* MobileNet.mlmodel */,
 				EDA44D071F736F24000745A3 /* AppDelegate.swift */,
 				ED8E0B5D1FAB1DAA0068EAA9 /* VideoCapture.swift */,
 				EDA44D091F736F24000745A3 /* ViewController.swift */,
@@ -207,7 +207,7 @@
 				ED7CB5F11FAB1AA900DAB977 /* UIImage+CVPixelBuffer.swift in Sources */,
 				ED7CB5EB1FAB1AA900DAB977 /* CVPixelBuffer+Helpers.swift in Sources */,
 				ED69CFD51F7FD3F9005EB009 /* OpenCVWrapper.mm in Sources */,
-				ED10B80D1FAB335B007CEDDA /* MobileNet.mlmodel in Sources */,
+				EDE9056E1FAC8F5900645FBF /* MobileNet.mlmodel in Sources */,
 				EDA44D081F736F24000745A3 /* AppDelegate.swift in Sources */,
 				ED7CB5F01FAB1AA900DAB977 /* Predictions.swift in Sources */,
 				ED7CB5EF1FAB1AA900DAB977 /* NonMaxSuppression.swift in Sources */,

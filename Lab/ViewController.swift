@@ -27,9 +27,16 @@ class ViewController: UIViewController
     var frameCapturingStartTime = CACurrentMediaTime()
     let semaphore = DispatchSemaphore(value: 2)
     
+    //let uiView = UIView(frame: CGRect(x: 0, y: 100, width: 360, height: 480))
+    let uiView = UIView(frame: CGRect(x: 0, y: 100, width: 224, height: 224))
+    
+    var cachePrediction: MLMultiArray!
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        self.view.addSubview(uiView)
         
         predictionLabel.text = ""
         timeLabel.text = ""
@@ -79,7 +86,7 @@ class ViewController: UIViewController
         }
         
         request = VNCoreMLRequest(model: visionModel, completionHandler: requestDidComplete)
-        request.imageCropAndScaleOption = .centerCrop
+        request.imageCropAndScaleOption = .scaleFit
     }
     
     // MARK: - UI stuff
@@ -117,31 +124,40 @@ class ViewController: UIViewController
     
     func requestDidComplete(request: VNRequest, error: Error?)
     {
-        if let observations = request.results as? [VNClassificationObservation]
+        if let results = request.results
         {
-            
-            // The observations appear to be sorted by confidence already, so we
-            // take the top 5 and map them to an array of (String, Double) tuples.
-            let top5 = observations.prefix(through: 4).map { ($0.identifier, Double($0.confidence)) }
-            
             DispatchQueue.main.async
             {
-                self.show(results: top5)
+                let pp = results[0] as! VNCoreMLFeatureValueObservation
+                
+                //let srcImage = MultiArray<Double>(pp.featureValue.multiArrayValue!).reshaped([2, 224, 224]).image(channel: 1, offset: 0, scale: 255)!
+                //let srcImage = OpenCVWrapper.mat8UC4Debug(self.cacheBuffer)!
+                //self.uiView.backgroundColor = UIColor(patternImage: srcImage)
+                
+                self.cachePrediction = pp.featureValue.multiArrayValue!
+                self.showFPS()
                 self.semaphore.signal()
             }
         }
     }
     
+    func showFPS()
+    {
+        let latency = CACurrentMediaTime() - startTimes.remove(at: 0)
+        let fps = self.measureFPS()
+        timeLabel.text = String(format: "%.2f FPS (latency %.5f seconds)", fps, latency)
+    }
+    
     func show(results: [Prediction])
     {
-        var s: [String] = []
+        /*var s: [String] = []
         
         for (i, pred) in results.enumerated()
         {
             s.append(String(format: "%d: %@ (%3.2f%%)", i + 1, pred.0, pred.1 * 100))
         }
         
-        predictionLabel.text = s.joined(separator: "\n\n")
+        predictionLabel.text = s.joined(separator: "\n\n")*/
         
         let latency = CACurrentMediaTime() - startTimes.remove(at: 0)
         let fps = self.measureFPS()
@@ -178,7 +194,12 @@ extension ViewController: VideoCaptureDelegate
             
             DispatchQueue.global().async
             {
-                //self.predict(pixelBuffer: pixelBuffer)
+                self.predict(pixelBuffer: pixelBuffer)
+            }
+            
+            DispatchQueue.main.async
+            {
+                self.uiView.backgroundColor = UIColor(patternImage: OpenCVWrapper.convGray(self.cachePrediction!))
             }
         }
     }

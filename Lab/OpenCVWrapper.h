@@ -12,12 +12,23 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #import <CoreML/CoreML.h>
+#import <CoreVideo/CoreVideo.h>
+
+#ifdef __cplusplus
+#import <opencv2/opencv.hpp>
+#endif
 
 @interface OpenCVWrapper : NSObject
 
 + (UIImage *)processImageWithOpenCV:(UIImage *)inputImage
                      withPrediction:(MLMultiArray *)prob
                           andBounds:(CGRect *)bounds;
+
++ (UIImage *)Mat8UC4Debug:(CVPixelBufferRef)pixelBuffer;
+
++ (void)setImageCache:(CVPixelBufferRef)pixelBuffer;
+
++ (UIImage *)convGray:(MLMultiArray *)prob;
 
 @end
 
