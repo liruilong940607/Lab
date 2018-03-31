@@ -28,15 +28,11 @@ class ViewController: UIViewController
     let semaphore = DispatchSemaphore(value: 2)
     
     //let uiView = UIView(frame: CGRect(x: 0, y: 100, width: 360, height: 480))
-    let uiView = UIView(frame: CGRect(x: 0, y: 100, width: 224, height: 224))
-    
-    var cachePrediction: MLMultiArray!
+    var uiView = UIImageView(frame: CGRect(x: 0, y: 100, width: 224, height: 224))
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
-        self.view.addSubview(uiView)
         
         predictionLabel.text = ""
         timeLabel.text = ""
@@ -131,10 +127,18 @@ class ViewController: UIViewController
                 let pp = results[0] as! VNCoreMLFeatureValueObservation
                 
                 //let srcImage = MultiArray<Double>(pp.featureValue.multiArrayValue!).reshaped([2, 224, 224]).image(channel: 1, offset: 0, scale: 255)!
-                //let srcImage = OpenCVWrapper.mat8UC4Debug(self.cacheBuffer)!
-                //self.uiView.backgroundColor = UIColor(patternImage: srcImage)
+                //let image = UIImage(cgImage: srcImage.cgImage!, scale: srcImage.scale, orientation: UIImageOrientation.upMirrored)
                 
-                self.cachePrediction = pp.featureValue.multiArrayValue!
+                let image = UIImage(cgImage: MultiArray<Double>(pp.featureValue.multiArrayValue!).reshaped([2, 224, 224]).image(channel: 1, offset: 0, scale: 255)!.cgImage!, scale: 1.0, orientation: UIImageOrientation.upMirrored)
+                
+                
+                self.uiView.removeFromSuperview()
+                self.uiView = UIImageView(frame: CGRect(x: 0, y: 100, width: 224, height: 224))
+                self.uiView.image = image
+                self.uiView.animationImages = nil
+                self.view.addSubview(self.uiView)
+                
+                
                 self.showFPS()
                 self.semaphore.signal()
             }
@@ -199,7 +203,8 @@ extension ViewController: VideoCaptureDelegate
             
             DispatchQueue.main.async
             {
-                self.uiView.backgroundColor = UIColor(patternImage: OpenCVWrapper.convGray(self.cachePrediction!))
+                
+                //self.uiView.backgroundColor = UIColor(patternImage: OpenCVWrapper.convGray(self.cachePrediction!))
             }
         }
     }
